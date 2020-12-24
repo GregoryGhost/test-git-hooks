@@ -7,11 +7,12 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "prettier-format": "npx prettier --write . | git commit -am \"[Autocommit] Prettier formatted files"
   },
   "husky": {
     "hooks": {
-      "pre-push": "powershell -NoProfile -ExecutionPolicy RemoteSigned  -Command ./apply-code-style.ps1"
+      "pre-push": "npm run build && npm run prettier-format && npm run lint && npm run build"
     }
   },
   "private": true,
