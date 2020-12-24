@@ -3,5 +3,6 @@ $haveUntrackedChanges = $gitStatus |Where {$_ -match '^\?\?'};
 $haveUncommitedChanges = $gitStatus |Where {$_ -notmatch '^\?\?'};
 if ($haveUntrackedChanges -or $haveUncommitedChanges)
 {
-    Invoke-Expression "git commit -am ""[Autocommit] Prettier formatted files"""
+    Invoke-Expression "git commit -am ""[Autocommit] Prettier formatted files""";
+    Write-Output "Done format files autocommit.`n";
 } 
