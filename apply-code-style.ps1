@@ -1,4 +1,17 @@
-﻿$gitStatus = Invoke-Expression -Command "git status --porcelain";
+﻿function Check-Build-Project {
+    return Invoke-Expression -Command "npm run build" | Out-Null; $?;
+}
+
+function Check-Lint-Project {
+    return Invoke-Expression -Command "npm run lint" | Out-Null; $?;
+}
+
+function Apply-CodeStyle {
+    return Invoke-Expression -Command "npx prettier --write . | git commit -am ""[Autocommit] Prettier formatted files""" | Out-Null; $?;
+}
+
+
+$gitStatus = Invoke-Expression -Command "git status --porcelain";
 $haveUntrackedChanges = $gitStatus |Where {$_ -match '^\?\?'};
 $haveUncommitedChanges = $gitStatus |Where {$_ -notmatch '^\?\?'};
 if ($haveUntrackedChanges)
@@ -18,12 +31,37 @@ if ($haveUntrackedChanges)
  exit 1;
 } else
 {
-    Write-Output "Применяю настройки codestyle'а";
+    Write-Output "Применяю настройки codestyle'а ...`n";
     try {
-        $isOkCodeStyle = Invoke-Expression -Command "npx prettier --write . | git commit -am ""[Autocommit] Prettier formatted files"" | npm run build | npm run lint" | Out-Null; $?;
-        if ($isOkCodeStyle) { exit 0; } else { exit 1; }
+        if (-Not (Check-Build-Project)) {
+            Write-Error "Сборка проекта не прошла.";
+            exit 1;
+        }
+        if (-Not (Check-Lint-Project)) {
+            Write-Error "Проверка проекта с помощью линтера не прошла.";
+            exit 1;
+        }
+        if (-Not (Apply-CodeStyle)) {
+            Write-Error "Не удалось применить настройки форматирования. 
+                Запустите prettier отдельно:
+                > npx prettier --write .";
+            exit 1;
+        }
+
+        Write-Output "Настройки codeStyle'а были применены.
+            Перепроверяю сборку и отсутствие ошибок от линтера ...`n";
+        
+        if (-Not (Check-Build-Project)) {
+            Write-Error "Сборка проекта не прошла.";
+            exit 1;
+        }
+        if (-Not (Check-Lint-Project)) {
+            Write-Error "Проверка проекта с помощью линтера не прошла.";
+            exit 1;
+        }
+        Write-Output "Сборка и линтер прошли, настройки codeStyle'а применены.`n";
     } catch {
-        Write-Error "Произошла ошибка в применении настроек codestyle'а";
+        Write-Error "Произошла ошибка в применении настроек codeStyle'а";
         throw
     }
 }
