@@ -8,9 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "commit-code-style-changes": "powershell -NoProfile -ExecutionPolicy RemoteSigned  -Command ./apply-code-style.ps1",
+    "commit-code-style-changes": "powershell -NoProfile -ExecutionPolicy RemoteSigned -Command ./apply-code-style.ps1",
     "prettier-format": "npx prettier --write . && npm run commit-code-style-changes",
-    "check-git-changes": "git status --porcelain",
+    "check-git-changes": "powershell -NoProfile -ExecutionPolicy RemoteSigned -Command ./check-git-changes.ps1",
     "pre-build": "npm run build && npm run prettier-format && npm run lint && npm run build"
   },
   "husky": {
