@@ -11,7 +11,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npx prettier --write . && git ci -am \"[Autocommit] Prettier formatted files\" && npm run build && npm run lint"
+      "pre-push": "npx prettier --write . && git commit -am \"[Autocommit] Prettier formatted files\" && npm run build && npm run lint"
     }
   },
   "private": true,
