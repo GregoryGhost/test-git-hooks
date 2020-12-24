@@ -1,4 +1,4 @@
-$gitStatus = Invoke-Expression -Command "git status --porcelain";
+﻿$gitStatus = Invoke-Expression -Command "git status --porcelain";
 $haveUntrackedChanges = $gitStatus |Where {$_ -match '^\?\?'};
 $haveUncommitedChanges = $gitStatus |Where {$_ -notmatch '^\?\?'};
 if ($haveUntrackedChanges)
