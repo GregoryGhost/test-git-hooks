@@ -21,7 +21,7 @@ if ($haveUntrackedChanges)
     Write-Output "Применяю настройки codestyle'а";
     try {
         $isOkCodeStyle = Invoke-Expression -Command "npx prettier --write . | git commit -am ""[Autocommit] Prettier formatted files"" | npm run build | npm run lint" | Out-Null; $?;
-        if ($isOkCodeStyle) { exit 0; } { throw }
+        if ($isOkCodeStyle) { exit 0; } else { exit 1; }
     } catch {
         Write-Error "Произошла ошибка в применении настроек codestyle'а";
         throw
