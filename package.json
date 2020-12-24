@@ -8,11 +8,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prettier-format": "npx prettier --write . | git commit -am \"[Autocommit] Prettier formatted files"
+    "prettier-format": "npx prettier --write . && git status --porcelain && git commit -am \"[Autocommit] Prettier formatted files"
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run build && npm run prettier-format && npm run lint && npm run build"
+      "pre-push": "npm run prettier-format && npm run lint && npm run build"
     }
   },
   "private": true,
