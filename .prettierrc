@@ -1,0 +1,14 @@
+{
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": "*.scss",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ],
+  "printWidth": 120,
+  "arrowParens": "always",
+  "endOfLine": "auto"
+}
