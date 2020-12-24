@@ -30,15 +30,19 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Inject git hooks inspection
 
 To get git hooks package Husky v4:
+
 ```bash
 npm i husk --save-dev
 ```
 
 For pretty format source code in the project:
+
 ```bash
 > npm i --save-dev --save-exact prettier
 ```
+
 And add basic configs for `prettier` to ignore folders (`.prettierignore`):
+
 ```text
 # Ignore artifacts:
 build
@@ -47,17 +51,21 @@ dist
 node_modules
 scripts
 ```
+
 And prettier format config `.prettierrc`:
 
 For linting project you need follow simple steps in this [article](https://github.com/angular-eslint/angular-eslint#migrating-an-angular-cli-project-from-codelyzer-and-tslint).
 Generally, you need to do this steps:
+
 ```bash
 > ng add @angular-eslint/schematics
 > ng g @angular-eslint/schematics:convert-tslint-to-eslint {{YOUR_PROJECT_NAME_GOES_HERE}}
 > rm tslint.json
 > npm unistall tslint codelyzer
 ```
+
 Add some eslint rules in eslint config `.eslintrc.json`:
+
 ```text
 {
   "root": true,
@@ -104,6 +112,7 @@ Add some eslint rules in eslint config `.eslintrc.json`:
 ```
 
 Added inspection scripts to `package.json`:
+
 ```json
 {
   "scripts": {
