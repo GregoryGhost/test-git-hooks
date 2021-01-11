@@ -32,7 +32,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 To get git hooks package Husky v4:
 
 ```bash
-npm i husk --save-dev
+npm i husky --save-dev
 ```
 
 For pretty format source code in the project:
@@ -61,7 +61,7 @@ Generally, you need to do this steps:
 > ng add @angular-eslint/schematics
 > ng g @angular-eslint/schematics:convert-tslint-to-eslint {{YOUR_PROJECT_NAME_GOES_HERE}}
 > rm tslint.json
-> npm unistall tslint codelyzer
+> npm uninstall tslint codelyzer
 ```
 
 Add some eslint rules in eslint config `.eslintrc.json`:
